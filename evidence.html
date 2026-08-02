@@ -147,6 +147,48 @@
           </svg>
           <figcaption>EXHIBIT D — Note the facets. A sphere does not do this. A disco ball does.</figcaption>
         </figure>
+
+        <figure class="exhibit">
+          <svg viewBox="0 0 200 140" role="img" aria-label="Grainy photograph purportedly showing a guinea pig in a cage with dinosaur-like dorsal spines">
+            <defs>
+              <filter id="grain-ex5">
+                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n" />
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0" />
+                <feComposite operator="over" in2="SourceGraphic" />
+              </filter>
+            </defs>
+            <rect width="200" height="140" fill="#1c1c18" />
+            <rect x="20" y="105" width="160" height="4" fill="#3a3a30" />
+            <ellipse cx="100" cy="82" rx="46" ry="24" fill="#8a6a3a" />
+            <path d="M70 66 L76 48 L82 66 Z" fill="#6a4e28" />
+            <path d="M92 62 L98 42 L104 62 Z" fill="#6a4e28" />
+            <path d="M114 66 L120 48 L126 66 Z" fill="#6a4e28" />
+            <circle cx="72" cy="80" r="2.2" fill="#000" />
+            <rect width="200" height="140" filter="url(#grain-ex5)" opacity="0.5" />
+          </svg>
+          <figcaption>EXHIBIT E — Dorsal ridges consistent with a much larger ancestor. Subject declined comment.</figcaption>
+        </figure>
+
+        <figure class="exhibit">
+          <svg viewBox="0 0 200 140" role="img" aria-label="Grainy photograph purportedly showing a pigeon on a power line with a glowing red eye">
+            <defs>
+              <filter id="grain-ex6">
+                <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="n" />
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0" />
+                <feComposite operator="over" in2="SourceGraphic" />
+              </filter>
+            </defs>
+            <rect width="200" height="140" fill="#2a2f36" />
+            <rect x="0" y="60" width="200" height="2" fill="#0d0f12" />
+            <ellipse cx="100" cy="82" rx="24" ry="16" fill="#5c6470" />
+            <circle cx="116" cy="68" r="9" fill="#5c6470" />
+            <circle cx="120" cy="66" r="1.2" fill="#ff2e2e">
+              <animate attributeName="opacity" values="1;0.15;1" dur="2.4s" repeatCount="indefinite" />
+            </circle>
+            <rect width="200" height="140" filter="url(#grain-ex6)" opacity="0.5" />
+          </svg>
+          <figcaption>EXHIBIT F — Subject did not blink for the entire six-minute exposure.</figcaption>
+        </figure>
       </div>
     </main>
           </td>
