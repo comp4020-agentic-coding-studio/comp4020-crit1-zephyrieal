@@ -79,6 +79,10 @@ h1 {
   font-size: 2rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  text-shadow:
+    2px 2px 0 #000,
+    -1px -1px 0 rgb(255 255 255 / 12%),
+    0 0 6px var(--neon-dim);
 }
 
 a {
@@ -94,17 +98,24 @@ a:focus {
 .terminal-header {
   max-width: 42rem;
   margin: 0 auto 2rem;
-  border: 1px solid var(--neon-dim);
+  border: 4px outset var(--neon-dim);
   padding: 1rem;
+  box-shadow: inset 0 0 12px rgb(57 255 20 / 15%);
 }
 
 .banner {
   margin: 0.5rem 0;
   color: #ff2e2e;
+  font-size: 2.75rem;
   font-weight: bold;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   text-align: center;
-  text-shadow: 0 0 6px #ff2e2e;
+  text-transform: uppercase;
+  line-height: 1.15;
+  text-shadow:
+    2px 2px 0 #000,
+    -1px -1px 0 rgb(255 255 255 / 25%),
+    0 0 12px #ff2e2e;
 }
 
 .blink {
@@ -144,7 +155,7 @@ nav[aria-label="Primary"] a::before {
 .document {
   position: relative;
   margin: 2rem 0;
-  border: 2px solid var(--ink);
+  border: 2px outset var(--ink);
   background: var(--paper);
   color: var(--ink);
   padding: 3rem 1.5rem 1.5rem;
@@ -296,7 +307,7 @@ nav[aria-label="Primary"] a::before {
 
 .exhibit {
   margin: 0;
-  border: 1px solid var(--neon-dim);
+  border: 2px outset var(--neon-dim);
   padding: 0.75rem;
 }
 
@@ -426,7 +437,7 @@ marquee {
 .side-rail {
   width: 12rem;
   padding: 0.5rem;
-  border: 3px solid var(--neon);
+  border: 3px outset var(--neon);
 }
 
 .side-rail-right {
@@ -434,7 +445,7 @@ marquee {
 }
 
 .content-col {
-  border: 3px solid var(--stamp-red);
+  border: 3px ridge var(--stamp-red);
   background: rgb(0 0 0 / 70%);
   padding: 0.5rem 1rem;
 }
@@ -466,7 +477,7 @@ marquee {
   border-style: inset;
 }
 
-/* --- under construction widget --- */
+/* --- under construction widget: relocated to its own hero page, see .uc-hero --- */
 .uc-widget {
   margin: 1rem 0;
   text-align: center;
@@ -478,6 +489,38 @@ marquee {
   max-width: 4rem;
   height: auto;
   margin: 0 auto 0.4rem;
+}
+
+.uc-widget.uc-hero {
+  margin: 2rem 0;
+}
+
+.uc-widget.uc-hero .uc-icon {
+  max-width: 9rem;
+}
+
+.uc-widget.uc-hero p {
+  font-size: 1.3rem;
+}
+
+/* --- sidebar clutter: news bulletins + ufo-sighting teasers --- */
+.sidebar-news,
+.sidebar-sightings {
+  margin: 0 0 1rem;
+  border: 2px outset var(--neon-dim);
+  padding: 0.5rem 0.6rem;
+  list-style: none;
+  font-size: 0.78rem;
+}
+
+.sidebar-news li,
+.sidebar-sightings li {
+  margin: 0.6rem 0;
+}
+
+.sidebar-news li::before {
+  content: "> ";
+  color: var(--gold);
 }
 
 /* --- rainbow section divider --- */
@@ -614,5 +657,9 @@ marquee {
   .side-rail {
     order: 0;
     width: 100%;
+  }
+
+  .banner {
+    font-size: 1.6rem;
   }
 }
