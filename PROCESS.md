@@ -48,6 +48,33 @@ like an amateur early-internet site, with no JavaScript anywhere.
    and looked at the rendered page before deciding the tone (witness quotes)
    was distinct enough to earn its own tab.
 
+4. **The brief asked for the site to feel like six months of someone
+   obsessively bolting features onto a GeoCities page** — table layout,
+   sidebars, a marquee, a hit counter, badges, a guestbook. The obvious move
+   was to restyle in place; instead I built the full new chrome once in
+   `index.html`, verified it rendered correctly at both marked viewports, and
+   only then hand-copied that exact block into the other seven pages plus a
+   new `guestbook.html` — so one reference implementation got debugged
+   instead of eight independent copies.
+   [`56fca77...072bd0c`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-zephyrieal/compare/56fca77...072bd0c) —
+   `pnpm check` stayed green throughout (68 → 75 tests as pages were added),
+   and `pnpm dlx linkinator ./dist --recurse` confirmed 0 broken links across
+   all 10 pages.
+
+5. **A headless-Chrome CLI screenshot at 390px looked like the new marquee
+   was overflowing on mobile.** The obvious fix was to shrink the marquee;
+   instead I first isolated whether the bug was real by stashing my changes
+   and re-screenshotting the original, unmodified `evidence.html` — it showed
+   the identical artifact, so the CLI's viewport handling, not my CSS, was at
+   fault. I switched to Puppeteer with an explicit `page.setViewport()`, which
+   rendered correctly, and while looking at those clean screenshots caught a
+   second, real bug: the "TOP SECRET" stamp overlapped the first line of text
+   on narrow viewports (visible on `moon-disco-ball.html` too, not just the
+   new guestbook page).
+   [`779a826`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-zephyrieal/commit/779a826) —
+   confirmed by re-screenshotting both affected pages at 390×844 before and
+   after the fix.
+
 ## Before you ship
 
 `pnpm check:evidence` verifies your citations resolve to real commits, that the
