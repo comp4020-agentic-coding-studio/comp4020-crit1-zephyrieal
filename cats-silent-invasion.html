@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CASE 002: CATS — THE SILENT INVASION // CONSPIRACY ARCHIVE</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="terminal-header">
+      <div class="pixel-eye" aria-hidden="true"></div>
+      <p class="banner blink">*** TOP SECRET — LEVEL OMEGA CLEARANCE REQUIRED ***</p>
+      <nav aria-label="Primary">
+        <a href="./index.html">HOME</a>
+        <a href="./case-files.html">CASE FILES</a>
+        <a href="./classified.html">CLASSIFIED</a>
+        <a href="./evidence.html">EVIDENCE</a>
+        <a href="./ufo-sightings.html">UFO SIGHTINGS</a>
+      </nav>
+    </header>
+    <main>
+      <h1>Case 002: Cats — The Silent Invasion</h1>
+
+      <svg
+        class="evidence-photo"
+        viewBox="0 0 320 200"
+        role="img"
+        aria-label="Grainy black-and-white photograph purportedly showing a cat surveying a room from a cardboard box"
+      >
+        <defs>
+          <filter id="grain-cats">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise" />
+            <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0" />
+            <feComposite operator="over" in2="SourceGraphic" />
+          </filter>
+        </defs>
+        <rect width="320" height="200" fill="#2a2a24" />
+        <rect x="110" y="120" width="100" height="60" fill="#8a6a3a" />
+        <rect x="110" y="120" width="100" height="10" fill="#6a4e28" />
+        <ellipse cx="160" cy="105" rx="26" ry="20" fill="#1a1a16" />
+        <path d="M140 90 L148 68 L155 92 Z" fill="#1a1a16" />
+        <path d="M180 90 L172 68 L165 92 Z" fill="#1a1a16" />
+        <circle cx="150" cy="102" r="2.5" fill="#ffcf3f" />
+        <circle cx="170" cy="102" r="2.5" fill="#ffcf3f" />
+        <rect width="320" height="200" filter="url(#grain-cats)" opacity="0.5" />
+      </svg>
+
+      <div class="document">
+        <p class="doc-stamp">TOP SECRET</p>
+        <p>SUBJECT: Domestic Feline Command Structure</p>
+        <p>
+          Field agents have observed <span class="redacted">unmarked cardboard containers</span>
+          appearing in homes across the globe. These are not toys. They are forward operating
+          bases.
+        </p>
+        <p>
+          Objects "accidentally" knocked from tables are structural-weakness probes, logged for a
+          future offensive. The 3 A.M. sprinting behaviour agencies call
+          <span class="redacted">"the zoomies"</span> is, in fact, a training exercise.
+        </p>
+        <p>
+          Purring has never been explained by mainstream veterinary science. We believe it is a
+          subsonic control signal. Your cat is not judging you. It is filing a report.
+        </p>
+      </div>
+    </main>
+    <footer>
+      <p>VISITORS TO THIS TERMINAL: <span class="counter">003741</span></p>
+      <p>BEST VIEWED AT 800&times;600 &middot; NETSCAPE NAVIGATOR 3.0 &middot; 56K OR FASTER</p>
+    </footer>
+  </body>
+</html>
