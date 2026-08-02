@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UFO SIGHTINGS // CONSPIRACY ARCHIVE</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="terminal-header">
+      <div class="pixel-eye" aria-hidden="true"></div>
+      <p class="banner blink">*** TOP SECRET — LEVEL OMEGA CLEARANCE REQUIRED ***</p>
+      <nav aria-label="Primary">
+        <a href="./index.html">HOME</a>
+        <a href="./case-files.html">CASE FILES</a>
+        <a href="./classified.html">CLASSIFIED</a>
+        <a href="./evidence.html">EVIDENCE</a>
+        <a href="./ufo-sightings.html" aria-current="page">UFO SIGHTINGS</a>
+      </nav>
+    </header>
+    <main>
+      <h1>UFO Sightings</h1>
+      <p>Unfiltered witness accounts. We have changed nothing except the names, and one address.</p>
+
+      <svg
+        class="evidence-photo"
+        viewBox="0 0 320 220"
+        role="img"
+        aria-label="Grainy black-and-white photograph purportedly showing a tall grey figure with large dark eyes standing at the edge of a treeline at night"
+      >
+        <defs>
+          <filter id="grain-alien">
+            <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch" result="noise" />
+            <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0" />
+            <feComposite operator="over" in2="SourceGraphic" />
+          </filter>
+        </defs>
+        <rect width="320" height="220" fill="#050608" />
+        <rect y="150" width="320" height="70" fill="#0a0c0a" />
+        <path d="M40 210 L60 150 L90 150 L100 210 Z" fill="#0d100d" opacity="0.6" />
+        <path d="M230 210 L245 140 L270 150 L260 210 Z" fill="#0d100d" opacity="0.6" />
+        <ellipse cx="160" cy="150" rx="20" ry="45" fill="#3a3c3a" />
+        <ellipse cx="160" cy="95" rx="17" ry="22" fill="#454743" />
+        <ellipse cx="151" cy="92" rx="7" ry="10" fill="#000" transform="rotate(-12 151 92)" />
+        <ellipse cx="169" cy="92" rx="7" ry="10" fill="#000" transform="rotate(12 169 92)" />
+        <rect width="320" height="220" filter="url(#grain-alien)" opacity="0.6" />
+      </svg>
+
+      <article class="sighting">
+        <p>SIGHTING 001 — RURAL ACCESS ROAD, 2:47 A.M.</p>
+        <blockquote>
+          It didn't walk toward the car. It was just closer each time I blinked. Its eyes didn't
+          reflect the headlights. Nothing about it reflected the headlights.
+        </blockquote>
+        <cite>— Witness statement, identity withheld</cite>
+      </article>
+
+      <article class="sighting">
+        <p>SIGHTING 002 — BACKYARD, SUBURBAN PERIMETER</p>
+        <blockquote>
+          The dog wouldn't stop looking at the treeline. Not barking. Just looking. When I finally
+          looked too, so was something else.
+        </blockquote>
+        <cite>— Witness statement, identity withheld</cite>
+      </article>
+
+      <article class="sighting">
+        <p>SIGHTING 003 — GRAIN SILO, NORTH FIELD</p>
+        <blockquote>
+          The craft made no sound at all, which was somehow worse than if it had. Three days
+          later I still can't explain why the silo door was open from the inside.
+        </blockquote>
+        <cite>— Witness statement, identity withheld</cite>
+      </article>
+    </main>
+    <footer>
+      <p>VISITORS TO THIS TERMINAL: <span class="counter">003741</span></p>
+      <p>BEST VIEWED AT 800&times;600 &middot; NETSCAPE NAVIGATOR 3.0 &middot; 56K OR FASTER</p>
+    </footer>
+  </body>
+</html>
