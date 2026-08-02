@@ -1,80 +1,58 @@
 # Process overview
 
-<!-- TEMPLATE: this file is a shape to fill in, not a form. Replace everything
-     in it with your own overview, and delete this comment — `pnpm
-     check:evidence` will remind you if it's still here. -->
-
-A reading-guide to how the work came together --- a map to your process, not an
-essay about it. Markers read this file and follow its citations; they don't
-trawl the repo for evidence you didn't point at, so if a moment mattered, cite
-it.
-
-This file is the shape; the course site's
-[assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
-is the requirement, and each brief adds its own word count and moment count.
+A reading-guide to how the work came together — a map to your process, not an
+essay about it.
 
 ## What I built
 
-One paragraph: the thing, and the idea behind it.
+**The Conspiracy Archive** — a GeoCities-style, X-Files-inspired site of
+invented (not real) conspiracies: the moon is a disco ball, cats are staging a
+silent invasion, goldfish never sleep. Black background, neon-green terminal
+text, a blinking "TOP SECRET" banner, CRT scanlines, grainy inline-SVG
+"photographs," and a pixel-art icon, spread across five tabs — Home, Case
+Files, Classified, Evidence, and UFO Sightings — deliberately built to feel
+like an amateur early-internet site, with no JavaScript anywhere.
 
 ## The moments that mattered
 
-Three or four for an assignment; fewer is fine for a weekly prototype. Keep the
-list short so each moment has room to do all four jobs:
+1. **The stack choice implied "no bundler," but the week's spec said "no
+   JavaScript" at all** — a stricter constraint than the one I'd already
+   satisfied. The obvious fix was to delete `main.js` and move on. Instead I
+   also wrote a spec test that fails if any `.js`/`.mjs` ships in `dist/` or
+   any page contains a `<script>` tag, so the constraint lives in the harness
+   and can't quietly regress on a later page.
+   [`e682940...0112148`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-zephyrieal/compare/e682940...0112148) —
+   I ran `pnpm check` afterwards (68 tests) to confirm red-then-green, not just
+   that the file was gone.
 
-1. **what happened** --- the problem, or the thing the agent got wrong
-2. **what you did instead of the obvious thing** --- the call you made, and why
-   it beat the obvious one
-3. **how you knew it was right** --- the check you ran, the viewport you looked
-   at, what you read before accepting the diff
-4. **the citation** --- a commit or commit range, a `CLAUDE.md` change, a check
-   that went from red to green, a prompt paired with the commit it produced
+2. **The site started as one homepage plus a flat archive page.** Partway
+   through, the brief I was given added CASE FILES / CLASSIFIED / EVIDENCE as
+   separate tabs, each with a different register (tabloid blurb, redacted
+   memo, exhibit caption). The obvious move was to keep one archive page and
+   add headings; instead I split it into dedicated pages so each tab's content
+   shape matches what it actually is, and backed the resulting fan-out with a
+   BFS reachability test (`spec/crit-1.test.ts`) asserting every built page is
+   reachable from `index.html` — so adding a tab without linking it from nav
+   fails loudly instead of shipping a dead page.
+   [`ee6206c...0e8aee4`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-zephyrieal/compare/ee6206c...0e8aee4) —
+   confirmed with `pnpm dlx linkinator ./dist --silent` (7/7 links resolved)
+   and a headless-Chrome screenshot at both marked viewports.
 
-Jobs 2 and 3 are the ones the repo can't tell a reader on its own, so they're
-where the marks are. The strongest moments are the ones where a correction
-landed in the **harness** rather than in another prompt --- a rule added to
-`CLAUDE.md`, a check wired up, an attempt thrown away: re-prompting until it
-passes is the routine case, and changing what the agent works against is the
-skilled one.
-
-Cite each moment as a link whose text is the commit hash or range and whose
-target is this repo's commit or compare URL, so a reader clicks straight to the
-evidence:
-
-- one commit: [`a1b2c3d`](https://github.com/YOUR-ORG/YOUR-REPO/commit/a1b2c3d)
-- a range:
-  [`a1b2c3d...e4f5a6b`](https://github.com/YOUR-ORG/YOUR-REPO/compare/a1b2c3d...e4f5a6b)
-
-To pair a prompt with the commit it produced, quote the prompt (curated, not a
-full transcript) next to the citation:
-
-> the prompt, verbatim
-
-Screenshots are welcome where one carries the verification better than a
-sentence does. Commit the file to this repo and link it with a **relative**
-path, which is what makes it render on GitHub: `![alt text](docs/before.png)`.
-Images don't count towards the word count and don't replace the citation.
-
-### A worked moment, for shape
-
-Delete this section along with the rest of the boilerplate --- it's here to show
-the four jobs in one paragraph, not to be imitated in content.
-
-> The date formatter kept coming back with `toLocaleDateString()` and no locale
-> argument, so the same build rendered differently on my machine and in CI. I'd
-> already re-prompted it twice, which fixed the line but not the habit, so the
-> third time I put the rule in `CLAUDE.md` instead
-> ([`3f9ac21`](https://github.com/YOUR-ORG/YOUR-REPO/commit/3f9ac21)) and added
-> a spec test that fails on a bare `toLocaleDateString`. That's what told me it
-> had actually taken: the test went red against the old code and green against
-> the new, and the next two features it wrote passed it without prompting
-> ([`3f9ac21...b7e0d14`](https://github.com/YOUR-ORG/YOUR-REPO/compare/3f9ac21...b7e0d14)).
+3. **UFO Sightings could have been folded into Evidence** — it was the
+   obvious place to slot in "scary aliens," since Evidence already had an
+   exhibit grid. I gave it a standalone tab instead, with its own
+   witness-testimony format (blockquotes, not captions), because the brief
+   called it out as its own thing, not a sub-case of the photo evidence.
+   [`95f0297`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-zephyrieal/commit/95f0297) —
+   checked the reachability test still passed with the fifth nav node added,
+   and looked at the rendered page before deciding the tone (witness quotes)
+   was distinct enough to earn its own tab.
 
 ## Before you ship
 
 `pnpm check:evidence` verifies your citations resolve to real commits, that the
 current reflection entry is in `reflections/`, and that your `CLAUDE.md` is
-there --- before a marker ever opens the file. It checks that your map is
+there — before a marker ever opens the file. It checks that your map is
 traceable, not that it is good: the marker judges whether your small,
 deliberately chosen set of moments shows real judgement and reflection. A green
 check is not a substitute for that curation.
