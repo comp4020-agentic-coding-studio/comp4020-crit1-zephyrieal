@@ -4,6 +4,8 @@
   --paper: #e8e2d0;
   --ink: #2a2a22;
   --stamp-red: #b3241f;
+  --cyan-brite: #2ea7ff;
+  --gold: #ffd23f;
 }
 
 * {
@@ -71,8 +73,6 @@ body::after {
 main {
   position: relative;
   z-index: 1;
-  max-width: 42rem;
-  margin: 0 auto;
 }
 
 h1 {
@@ -232,11 +232,12 @@ nav[aria-label="Primary"] a::before {
 .case-list li::before {
   content: "";
   display: inline-block;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
   margin-right: 0.75rem;
   margin-left: -1.5rem;
-  background: var(--neon);
+  background: var(--gold);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }
 
 /* homepage news ticker */
@@ -339,9 +340,279 @@ footer {
 }
 
 .counter {
-  padding: 0.1rem 0.4rem;
-  background: #000;
+  padding: 0.2rem 0.5rem;
+  background: #001400;
   color: var(--neon);
   font-weight: bold;
+  letter-spacing: 0.3em;
+  border: 3px solid #0a5a0a;
+  border-top-color: #062606;
+  border-left-color: #062606;
+  box-shadow: inset 0 0 6px #000;
+}
+
+/* ================================================================
+   MAXIMALISM PASS — table-based page shell, sidebars, and widgets
+   ================================================================ */
+
+/* --- marquee strip, sits under the banner in every page's header --- */
+.marquee-strip {
+  overflow: hidden;
+  width: 100%;
+  margin: 0.5rem 0 0;
+  border: 2px dashed var(--stamp-red);
+  background: #100;
+  padding: 0.3rem 0;
+}
+
+marquee {
+  display: block;
+  width: 100%;
+  color: var(--gold);
+  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+/* --- badge stack: a nested table of "link exchange" badges, declared before
+   the page-frame rules below so its lower-specificity `td`/`tr` selectors
+   don't trip stylelint's descending-specificity check --- */
+.badge-stack {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.badge-stack td {
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.badge {
+  display: block;
+  width: 100%;
+  max-width: 11rem;
+  height: auto;
+  margin: 0 auto;
+}
+
+.rail-heading {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
   letter-spacing: 0.1em;
+  text-align: center;
+  color: var(--gold);
+}
+
+/* --- page frame: a real nested table layout, left/right sidebars flank the reading column --- */
+.page-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 68rem;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0.75rem;
+  background-color: #0a0a0a;
+  background-image:
+    repeating-linear-gradient(45deg, rgb(57 255 20 / 6%) 0, rgb(57 255 20 / 6%) 1px, transparent 1px, transparent 12px),
+    repeating-linear-gradient(-45deg, rgb(57 255 20 / 6%) 0, rgb(57 255 20 / 6%) 1px, transparent 1px, transparent 12px);
+}
+
+.page-frame > tbody > tr > td {
+  vertical-align: top;
+}
+
+.side-rail {
+  width: 12rem;
+  padding: 0.5rem;
+  border: 3px solid var(--neon);
+}
+
+.side-rail-right {
+  border-color: var(--cyan-brite);
+}
+
+.content-col {
+  border: 3px solid var(--stamp-red);
+  background: rgb(0 0 0 / 70%);
+  padding: 0.5rem 1rem;
+}
+
+.content-col main {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.content-col :is(h1, h2, h3, p, blockquote, figcaption) {
+  text-align: center;
+}
+
+/* --- beveled 90s button, used for badges' link-exchange frame and the guestbook form --- */
+.btn-3d {
+  display: inline-block;
+  border: 3px outset #9c9c8e;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 0.35rem 0.9rem;
+  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.btn-3d:active {
+  border-style: inset;
+}
+
+/* --- under construction widget --- */
+.uc-widget {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.uc-icon {
+  display: block;
+  width: 100%;
+  max-width: 4rem;
+  height: auto;
+  margin: 0 auto 0.4rem;
+}
+
+/* --- rainbow section divider --- */
+.rainbow-divider {
+  height: 6px;
+  margin: 2rem auto;
+  border: 0;
+  background: linear-gradient(90deg, red, orange, #fe0, limegreen, dodgerblue, indigo, violet);
+}
+
+.content-col .rainbow-divider {
+  max-width: 42rem;
+}
+
+/* --- small heading icons, pure generated content, decorative only --- */
+.heading-icon::before {
+  display: inline-block;
+  margin-right: 0.4rem;
+  color: var(--gold);
+  text-shadow: none;
+}
+
+.heading-icon-star::before {
+  content: "\2605";
+}
+
+.heading-icon-new::before {
+  content: "\2726";
+}
+
+.heading-icon-eye::before {
+  content: "\25C9";
+}
+
+/* --- scoped throwback utilities: not a global palette change --- */
+.font-comic {
+  font-family: "Comic Sans MS", "Comic Sans", cursive, sans-serif;
+}
+
+.font-times {
+  font-family: "Times New Roman", Times, serif;
+}
+
+.link-classic {
+  color: #00e;
+  text-decoration: underline;
+  text-shadow: none;
+}
+
+.link-classic:visited {
+  color: #518;
+}
+
+.link-classic:hover,
+.link-classic:focus {
+  color: #e00;
+}
+
+/* --- guestbook entries + inert sign-in form --- */
+.guestbook-entry {
+  margin: 1.5rem 0;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1rem;
+  text-shadow: none;
+}
+
+.guestbook-entry .entry-meta {
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.guestbook-form {
+  margin: 2rem 0;
+  border: 3px outset #9c9c8e;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1rem;
+  text-shadow: none;
+}
+
+.guestbook-form legend {
+  padding: 0 0.5rem;
+  font-weight: bold;
+}
+
+.guestbook-form label {
+  display: block;
+  margin: 0.75rem 0 0.25rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+  width: 100%;
+  border: 2px inset #9c9c8e;
+  padding: 0.4rem;
+  font-family: inherit;
+}
+
+.guestbook-form .btn-3d {
+  margin-top: 1rem;
+}
+
+/* --- collapse the table shell to a single legible column at phone width --- */
+@media (width <= 640px) {
+  .badge-stack,
+  .badge-stack tbody,
+  .badge-stack tr,
+  .badge-stack td {
+    display: block;
+    width: auto;
+  }
+
+  .page-frame,
+  .page-frame > tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .page-frame > tbody > tr {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .content-col {
+    order: -1;
+    width: 100%;
+  }
+
+  .side-rail {
+    order: 0;
+    width: 100%;
+  }
 }
