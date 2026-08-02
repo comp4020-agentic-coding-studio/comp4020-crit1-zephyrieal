@@ -1,16 +1,347 @@
+:root {
+  --neon: #39ff14;
+  --neon-dim: #1c8a0a;
+  --paper: #e8e2d0;
+  --ink: #2a2a22;
+  --stamp-red: #b3241f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
+  position: relative;
   margin: 0;
-  padding: 2rem;
-  font-family: system-ui, sans-serif;
+  padding: 2rem 1.5rem 4rem;
+  background: #050505;
+  color: var(--neon);
+  font-family: "Courier New", monospace;
   line-height: 1.6;
-  color: #1a1a1a;
+  text-shadow: 0 0 2px var(--neon-dim);
+  overflow-x: hidden;
+}
+
+/* CRT scanlines + flicker, layered over everything but clicks pass through */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgb(0 0 0 / 15%) 0,
+    rgb(0 0 0 / 15%) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  animation: flicker 6s infinite;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 55%, rgb(0 0 0 / 70%) 100%);
+}
+
+@keyframes flicker {
+  0%,
+  96%,
+  100% {
+    opacity: 1;
+  }
+
+  97% {
+    opacity: 0.85;
+  }
+
+  98% {
+    opacity: 1;
+  }
+
+  99% {
+    opacity: 0.9;
+  }
 }
 
 main {
-  max-width: 40rem;
+  position: relative;
+  z-index: 1;
+  max-width: 42rem;
   margin: 0 auto;
 }
 
+h1 {
+  font-size: 2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
 a {
-  color: #0b5fff;
+  color: var(--neon);
+}
+
+a:hover,
+a:focus {
+  color: #fff;
+}
+
+/* terminal chrome shared by every page */
+.terminal-header {
+  max-width: 42rem;
+  margin: 0 auto 2rem;
+  border: 1px solid var(--neon-dim);
+  padding: 1rem;
+}
+
+.banner {
+  margin: 0.5rem 0;
+  color: #ff2e2e;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-shadow: 0 0 6px #ff2e2e;
+}
+
+.blink {
+  animation: blink 1.1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+nav[aria-label="Primary"] {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+nav[aria-label="Primary"] a[aria-current="page"] {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav[aria-label="Primary"] a::before {
+  content: "> ";
+}
+
+.slogan {
+  font-size: 1.1rem;
+  color: #fff;
+  text-align: center;
+}
+
+/* "classified document" panel: a scanned paper look against the dark terminal */
+.document {
+  position: relative;
+  margin: 2rem 0;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 1.5rem;
+  font-family: "Courier New", monospace;
+  text-shadow: none;
+}
+
+.doc-stamp {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  transform: rotate(-12deg);
+  border: 3px solid var(--stamp-red);
+  color: var(--stamp-red);
+  padding: 0.15rem 0.6rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  opacity: 0.85;
+}
+
+.redacted {
+  background: #111;
+  color: #111;
+  user-select: none;
+}
+
+/* grainy evidence photo, built from SVG shapes + a turbulence filter — no image files */
+.evidence-photo {
+  display: block;
+  width: 100%;
+  max-width: 24rem;
+  height: auto;
+  margin: 1.5rem auto;
+  border: 1px solid var(--neon-dim);
+  filter: grayscale(1) contrast(1.1);
+}
+
+/* CSS-only pixel-art eye, drawn with one box-shadow per "pixel" */
+.pixel-eye {
+  width: 4px;
+  height: 4px;
+  margin: 0 auto 0.75rem;
+  background: var(--neon);
+  box-shadow:
+    4px 0 var(--neon),
+    8px 0 var(--neon),
+    12px 0 var(--neon),
+    -4px 4px var(--neon),
+    16px 4px var(--neon),
+    -8px 8px var(--neon),
+    0 8px var(--neon),
+    12px 8px var(--neon),
+    20px 8px var(--neon),
+    -8px 12px var(--neon),
+    4px 12px var(--neon),
+    8px 12px var(--neon),
+    20px 12px var(--neon),
+    -8px 16px var(--neon),
+    4px 16px var(--neon),
+    8px 16px var(--neon),
+    20px 16px var(--neon),
+    -8px 20px var(--neon),
+    0 20px var(--neon),
+    12px 20px var(--neon),
+    20px 20px var(--neon),
+    -4px 24px var(--neon),
+    16px 24px var(--neon),
+    0 28px var(--neon),
+    4px 28px var(--neon),
+    8px 28px var(--neon),
+    12px 28px var(--neon);
+}
+
+.case-list {
+  list-style: none;
+  margin: 1.5rem 0;
+  padding: 0;
+}
+
+.case-list li {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.case-list li::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 0.75rem;
+  margin-left: -1.5rem;
+  background: var(--neon);
+}
+
+/* homepage news ticker */
+.transmissions {
+  margin: 2rem 0;
+  border: 1px dashed var(--neon-dim);
+  padding: 1rem;
+}
+
+.transmissions h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+}
+
+.transmissions ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.transmissions li {
+  margin: 0.6rem 0;
+}
+
+.transmissions li::before {
+  content: "> ";
+  color: var(--neon-dim);
+}
+
+/* case-files: short fake-news blurbs, each optionally linking to a full dossier */
+.case-blurb {
+  margin: 1.5rem 0;
+  border-bottom: 1px solid var(--neon-dim);
+  padding-bottom: 1.5rem;
+}
+
+.case-blurb h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+  letter-spacing: 0.05em;
+}
+
+.case-blurb .dossier-link {
+  display: inline-block;
+  margin-top: 0.4rem;
+}
+
+/* evidence: a small gallery of exhibits */
+.exhibit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.exhibit {
+  margin: 0;
+  border: 1px solid var(--neon-dim);
+  padding: 0.75rem;
+}
+
+.exhibit figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+/* ufo sightings: an uneasy red-tinted variant of the terminal look */
+.sighting {
+  margin: 2rem 0;
+  border-left: 3px solid #ff2e2e;
+  padding-left: 1rem;
+}
+
+.sighting blockquote {
+  margin: 0.5rem 0;
+  color: #ffb3b3;
+  font-style: italic;
+}
+
+.sighting cite {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--neon-dim);
+  font-style: normal;
+  font-size: 0.85rem;
+}
+
+footer {
+  position: relative;
+  z-index: 1;
+  max-width: 42rem;
+  margin: 3rem auto 0;
+  border-top: 1px dashed var(--neon-dim);
+  padding-top: 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  color: var(--neon-dim);
+}
+
+.counter {
+  padding: 0.1rem 0.4rem;
+  background: #000;
+  color: var(--neon);
+  font-weight: bold;
+  letter-spacing: 0.1em;
 }
