@@ -7,11 +7,13 @@ essay about it.
 
 **The Conspiracy Archive** — a GeoCities-style, X-Files-inspired site of
 invented (not real) conspiracies: the moon is a disco ball, cats are staging a
-silent invasion, goldfish never sleep. Black background, neon-green terminal
-text, a blinking "TOP SECRET" banner, CRT scanlines, grainy inline-SVG
-"photographs," and a pixel-art icon, spread across five tabs — Home, Case
-Files, Classified, Evidence, and UFO Sightings — deliberately built to feel
-like an amateur early-internet site, with no JavaScript anywhere.
+silent invasion, goldfish never sleep, dinosaurs live on as guinea pigs,
+pigeons are surveillance drones. Black background, neon-green terminal text,
+a huge blinking "TOP SECRET CONSPIRACY ARCHIVE!!!" banner, CRT scanlines,
+fake-3D beveled panels, grainy inline-SVG "photographs," table-based sidebars
+cluttered with fake news bulletins and a dead-end "join" button, spread across
+twelve pages — deliberately built to feel like an amateur early-internet site
+that's had features bolted onto it for years, with no JavaScript anywhere.
 
 ## The moments that mattered
 
@@ -74,6 +76,32 @@ like an amateur early-internet site, with no JavaScript anywhere.
    [`779a826`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-zephyrieal/commit/779a826) —
    confirmed by re-screenshotting both affected pages at 390×844 before and
    after the fix.
+
+6. **The brief asked for a "JOIN THE TRUE BELIEVERS" button whose whole joke is
+   that it goes nowhere — but a button that 404s or silently does nothing
+   reads as broken, not as a joke.** The obvious move was to make it a
+   no-op `<a href="#">`; instead I built `true-believers.html` as a real,
+   fully-chromed page that resolves the joke honestly — a hero-sized
+   "permanently under construction" widget and no signup form anywhere, which
+   I confirmed by grepping the file for `<form`/`<input`/`type="submit"`
+   rather than trusting that I'd written it that way. That also meant the
+   button had to be a genuine reachable link, so I re-ran the BFS reachability
+   test rather than assuming a sidebar addition on ten pages didn't break it.
+   [`6844114...ce6c85c`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-zephyrieal/compare/6844114...ce6c85c) —
+   `pnpm check` went 75 → 82 tests as the page landed, and I screenshotted it
+   at both marked viewports before moving on.
+7. **Adding two more invented conspiracies (dinosaurs-as-guinea-pigs,
+   surveillance pigeons) could have been two more paragraphs bolted onto an
+   existing page.** The brief's dossier format (Case NNN, grainy SVG "photo,"
+   TOP SECRET memo with redactions) already existed for three other cases, so
+   I gave the new ones the same full treatment instead of a shortcut — new
+   pages, new case-blurb teasers on Case Files, new exhibits on Evidence —
+   so the site's internal pattern stays consistent rather than having two
+   conspiracies that are visibly second-class.
+   [`d8134aa...c858dd7`](https://github.com/comp4020-agentic-coding-studio/comp4020-crit1-zephyrieal/compare/d8134aa...c858dd7) —
+   confirmed with `pnpm dlx linkinator ./dist --recurse` (0 broken links
+   across all 12 pages) and screenshots of both new dossier pages at
+   1920×1080 and 390×844.
 
 ## Before you ship
 
