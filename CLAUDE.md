@@ -1,8 +1,9 @@
 # COMP4020 prototype
 
-This is your starter repo for a COMP4020 prototype: a static site written in
-HTML/CSS/TypeScript that builds to plain HTML/CSS/JS and deploys to GitHub
-Pages. The **deployed site is what gets marked** --- not this repo, and not "it
+This is your starter repo for a COMP4020 prototype: a static site written by
+hand in plain HTML/CSS/JS, with no bundler — `pnpm build`
+(`scripts/build.mjs`) just copies those files into `dist/` verbatim — and
+deploys to GitHub Pages. The **deployed site is what gets marked** --- not this repo, and not "it
 works on my machine". It's marked live in Chrome against the deployed URL at two
 viewports --- 1920×1080 (desktop) and 390×844 (phone) --- and both count in
 full, so make that artefact good at both and use the checks below to know
@@ -48,10 +49,6 @@ While the repo is private (all week, until you ship) the CI jobs stay skipped
 anyway. They aren't hoops. Each is a different way of finding out something true
 about the site that you can't reliably see by looking at it.
 
-- **typecheck** --- `tsc --noEmit` runs first in `pnpm check`, so a type error
-  stops the roster before the build even starts. The types are extra
-  backpressure: a red here is the compiler telling you a claim in the code is
-  false.
 - **build** --- the site must build (`pnpm build`). A build failure means the
   deployed site is broken or stale, so nothing else matters until this is green.
 - **deploy / online** --- the live GitHub Pages URL must load and return the
@@ -93,11 +90,12 @@ CI machine, not proof the site is fast for real users.
 
 ## The stack is swappable
 
-Out of the box this is plain HTML/CSS/TypeScript on Vite, and every `.html` file
-in the repo is a page: add pages, link them, and the build picks them up with no
-config. That's a default, not a rule (unless the week's spec says otherwise).
-You can swap in Astro or any other static generator, because nothing in CI names
-a tool --- the whole contract is:
+Right now this is hand-written HTML/CSS/JS with no bundler: every `.html`,
+`.css`, `.js`, and `.mjs` file in the repo is a site asset, and
+`scripts/build.mjs` copies them into `dist/` with no transform, no config. That's
+a choice, not a rule (unless the week's spec says otherwise) --- you can bring
+back Vite, add TypeScript, or swap in Astro or any other static generator,
+because nothing in CI names a tool --- the whole contract is:
 
 - `pnpm build` emits the complete site into `dist/`
 - the `package.json` scripts (`check`, `check:evidence`, `build`) keep working
@@ -105,10 +103,11 @@ a tool --- the whole contract is:
 
 Two things bite in a swap. The deployed site lives under a path
 (`…github.io/<repo>/`), so configure your generator's base path --- this
-template's Vite config uses relative asset URLs to sidestep that, but most
-generators (Astro included) need `base` set explicitly, and getting it wrong
-looks fine locally while every asset 404s on the live URL. And commit the
-updated `pnpm-lock.yaml`: CI installs with `--frozen-lockfile`.
+bare setup uses relative asset URLs (`./styles.css`, `./main.js`) to sidestep
+that, but most generators (Astro included, and Vite too if you bring it back)
+need `base` set explicitly, and getting it wrong looks fine locally while every
+asset 404s on the live URL. And commit the updated `pnpm-lock.yaml`: CI installs
+with `--frozen-lockfile`.
 
 ## Your process is part of the mark
 
