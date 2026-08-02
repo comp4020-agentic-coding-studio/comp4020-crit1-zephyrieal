@@ -3,21 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>COMP4020 prototype</title>
+    <title>CONSPIRACY ARCHIVE // TERMINAL ACCESS</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
-    <header>
+    <header class="terminal-header">
+      <div class="pixel-eye" aria-hidden="true"></div>
+      <p class="banner blink">*** TOP SECRET — LEVEL OMEGA CLEARANCE REQUIRED ***</p>
       <nav aria-label="Primary">
-        <a href="./">Home</a>
+        <a href="./index.html" aria-current="page">HOME</a>
+        <a href="./case-files.html">CASE FILES</a>
+        <a href="./classified.html">CLASSIFIED</a>
+        <a href="./evidence.html">EVIDENCE</a>
+        <a href="./ufo-sightings.html">UFO SIGHTINGS</a>
       </nav>
     </header>
     <main>
-      <h1>COMP4020 prototype</h1>
-      <p data-testid="intro">
-        Replace this with your prototype. This week's brief is on the course website;
-        <code>spec/README.md</code> explains how the checks in this repo relate to it.
+      <h1>Conspiracy Archive</h1>
+      <p class="slogan">THE TRUTH IS PROBABLY NOT OUT THERE.</p>
+
+      <svg
+        class="evidence-photo"
+        viewBox="0 0 320 200"
+        role="img"
+        aria-label="Grainy black-and-white photograph purportedly showing a disc-shaped object over a suburban street"
+      >
+        <defs>
+          <filter id="grain-home">
+            <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" result="noise" />
+            <feColorMatrix in="noise" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.5 0" />
+            <feComposite operator="over" in2="SourceGraphic" />
+          </filter>
+        </defs>
+        <rect width="320" height="200" fill="#3a3a34" />
+        <rect y="150" width="320" height="50" fill="#1c1c18" />
+        <ellipse cx="160" cy="110" rx="70" ry="14" fill="#111" />
+        <ellipse cx="160" cy="98" rx="32" ry="17" fill="#222" />
+        <circle cx="160" cy="60" r="5" fill="#eee" opacity="0.6" />
+        <rect width="320" height="200" filter="url(#grain-home)" opacity="0.55" />
+      </svg>
+
+      <div class="document">
+        <p class="doc-stamp">TOP SECRET</p>
+        <p>
+          WELCOME, <span class="redacted">AGENT XXXXXXX</span>. This terminal connects to a
+          <span class="redacted">classified</span> database of anomalies the mainstream press
+          will not print.
+        </p>
+        <p>Every file has been independently verified by absolutely no one. Browse at your own risk.</p>
+      </div>
+
+      <section class="transmissions" aria-labelledby="transmissions-heading">
+        <h2 id="transmissions-heading">LATEST TRANSMISSIONS</h2>
+        <ul>
+          <li>LATEST DISCOVERY! Goldfish never sleep. Clearly, we are being watched.</li>
+          <li>UPDATE: Your microwave has finished counting. It will not say what.</li>
+          <li>BREAKING: Pigeons observed standing suspiciously still near power lines.</li>
+        </ul>
+      </section>
+
+      <p>
+        Full write-ups in <a href="./case-files.html">CASE FILES</a>, primary sources in
+        <a href="./classified.html">CLASSIFIED</a>, and the photographs they don't want you to see
+        in <a href="./evidence.html">EVIDENCE</a>.
       </p>
     </main>
+    <footer>
+      <p>VISITORS TO THIS TERMINAL: <span class="counter">003741</span></p>
+      <p>BEST VIEWED AT 800&times;600 &middot; NETSCAPE NAVIGATOR 3.0 &middot; 56K OR FASTER</p>
+    </footer>
   </body>
 </html>
